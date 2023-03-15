@@ -1,17 +1,7 @@
 package vn.capa.entities;
 
-import java.sql.Date;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-import vn.capa.enums.Color;
+import javax.persistence.*;
+import java.util.List;
 
 @Table(name="product")
 @Entity
@@ -20,16 +10,13 @@ public class Product {
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private int id;
 	private String name;
-	private double price;
+	@OneToMany(mappedBy="product")
+	private List<ProductOrderData> productOrderData;
 	@Column(name = "is_out_of_stock")
 	private boolean isOutOfStock;
 	private double weight;
 	private double height;
-	@Column(name = "produce_date")
-	private Date produceDate;
 	private int size;
-	@Enumerated(value=EnumType.STRING)
-	private Color color;
 
 	public int getId() {
 		return id;
@@ -47,20 +34,12 @@ public class Product {
 		this.name = name;
 	}
 
-	public double getPrice() {
-		return price;
-	}
-
-	public void setPrice(double price) {
-		this.price = price;
-	}
-
 	public boolean isOutOfStock() {
 		return isOutOfStock;
 	}
 
-	public void setOutOfStock(boolean isOutOfStock) {
-		this.isOutOfStock = isOutOfStock;
+	public void setOutOfStock(boolean outOfStock) {
+		isOutOfStock = outOfStock;
 	}
 
 	public double getWeight() {
@@ -79,14 +58,6 @@ public class Product {
 		this.height = height;
 	}
 
-	public Date getProduceDate() {
-		return produceDate;
-	}
-
-	public void setProduceDate(Date produceDate) {
-		this.produceDate = produceDate;
-	}
-
 	public int getSize() {
 		return size;
 	}
@@ -95,12 +66,11 @@ public class Product {
 		this.size = size;
 	}
 
-	public Color getColor() {
-		return color;
+	public List<ProductOrderData> getProductOrderData() {
+		return productOrderData;
 	}
 
-	public void setColor(Color color) {
-		this.color = color;
+	public void setProductOrderData(List<ProductOrderData> productOrderData) {
+		this.productOrderData = productOrderData;
 	}
-
 }

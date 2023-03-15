@@ -4,7 +4,5 @@ public enum Status {
 	DONE,
 	SHIPPING,
 	ORDERING;
-	
-	
 
 }

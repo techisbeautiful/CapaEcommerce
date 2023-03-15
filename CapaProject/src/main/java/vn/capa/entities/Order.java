@@ -1,84 +1,72 @@
 package vn.capa.entities;
 
-import java.sql.Date;
-import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-import vn.capa.enums.Color;
 import vn.capa.enums.Status;
 
-@Table(name="order")
+import javax.persistence.*;
+import java.util.List;
+
+@Table(name="\"order\"")
 @Entity
 public class Order {
-@Id
-@GeneratedValue (strategy= GenerationType.IDENTITY)
-private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    @OneToMany(mappedBy="order")
+    private List<ProductOrderData> productOrderData;
+    @Column(name="is_delete")
+    private boolean isDelete;
+    @Column(name="total_price")
+    private double totalPrice;
+    @Column(name="tax")
+    private double tax;
+    @Enumerated(value=EnumType.STRING)
+    private Status status;
 
-private List<Product> products;
+    public int getId() {
+        return id;
+    }
 
-@Column(name = "is_delete")
-private boolean isDelete;
-@Column(name = "total_price")
-private double totalPrice;
-private double tax;
+    public void setId(int id) {
+        this.id = id;
+    }
 
-@Enumerated(value=EnumType.STRING)
-private Status status;
+    public List<ProductOrderData> getProductOrderData() {
+        return productOrderData;
+    }
 
-public int getId() {
-	return id;
-}
+    public void setProductOrderData(List<ProductOrderData> productOrderData) {
+        this.productOrderData = productOrderData;
+    }
 
-public void setId(int id) {
-	this.id = id;
-}
+    public boolean isDelete() {
+        return isDelete;
+    }
 
-public List<Product> getProducts() {
-	return products;
-}
+    public void setDelete(boolean delete) {
+        isDelete = delete;
+    }
 
-public void setProducts(List<Product> products) {
-	this.products = products;
-}
+    public double getTotalPrice() {
+        return totalPrice;
+    }
 
-public boolean isDelete() {
-	return isDelete;
-}
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
 
-public void setDelete(boolean isDelete) {
-	this.isDelete = isDelete;
-}
+    public double getTax() {
+        return tax;
+    }
 
-public double getTotalPrice() {
-	return totalPrice;
-}
+    public void setTax(double tax) {
+        this.tax = tax;
+    }
 
-public void setTotalPrice(double totalPrice) {
-	this.totalPrice = totalPrice;
-}
+    public Status getStatus() {
+        return status;
+    }
 
-public double getTax() {
-	return tax;
-}
-
-public void setTax(double tax) {
-	this.tax = tax;
-}
-
-public Status getStatus() {
-	return status;
-}
-
-public void setStatus(Status status) {
-	this.status = status;
-}
-
+    public void setStatus(Status status) {
+        this.status = status;
+    }
 }
