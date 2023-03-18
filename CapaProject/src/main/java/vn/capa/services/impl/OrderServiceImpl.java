@@ -20,7 +20,25 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public Order update(Order order) {
 		// TODO Auto-generated method stub
-		return null;
+		return orderRepository.save(order);
+		
+	}
+
+	@Override
+	public Order editOrder(Order order) {
+		// TODO Auto-generated method stub
+		return orderRepository.save(order);
+		
+	}
+
+	@Override
+	public void delete(int id) {
+		// TODO Auto-generated method stub
+		orderRepository.deleteById(id);
+
+		
+	
+		
 	}
 
 }

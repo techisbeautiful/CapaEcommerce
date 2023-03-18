@@ -21,7 +21,15 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public Product update(Product product) {
 		// TODO Auto-generated method stub
-		return null;
+		return productRepository.save(product);
+
+	}
+
+	@Override
+	public void delete(int product) {
+		// TODO Auto-generated method stub
+		productRepository.deleteById(product);
+		
 	}
 
 }
